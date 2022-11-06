@@ -10,7 +10,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><jsp:invoke fragment="header"/></title>
+    <title>
+        <jsp:invoke fragment="header"/>
+    </title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -18,18 +20,19 @@
 </head>
 <body>
 <header>
+    <img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;"
+         class="img-fluid rounded mx-auto d-block"/>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="${pageContext.request.contextPath}/images/cphbusiness.png" width="400px;" class="img-fluid"/>
-            </a>
+            <%--            <a class="navbar-brand" href="index.jsp">--%>
+            <%--                <img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;" class="img-fluid"/>--%>
+            <%--            </a>--%>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 1</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
                     <c:if test="${sessionScope.user == null }">
@@ -38,6 +41,10 @@
                     <c:if test="${sessionScope.user != null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
+                    <div class="me-auto">
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
+                                src="${pageContext.request.contextPath}/images/basket.png" width="50" height="60"></a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -45,7 +52,9 @@
 </header>
 
 <div id="body" class="container mt-4" style="min-height: 400px;">
-    <h1><jsp:invoke fragment="header"/></h1>
+    <h1>
+        <jsp:invoke fragment="header"/>
+    </h1>
     <jsp:doBody/>
 </div>
 
@@ -58,7 +67,8 @@
             2800 Lyngby
         </div>
         <div class="col">
-            <jsp:invoke fragment="footer"/><br/>
+            <jsp:invoke fragment="footer"/>
+            <br/>
             <p>&copy; 2022 Cphbusiness</p>
         </div>
         <div class="col">
