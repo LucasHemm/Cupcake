@@ -5,7 +5,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage YOU DID it you bastard
+         Welcome to the frontpage YOU DID it you bastard it finally worked
     </jsp:attribute>
 
     <jsp:attribute name="footer">
