@@ -1,81 +1,52 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.entities.Cupcake;
+import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OrderMapper {
 
 
-    static User login(String email, String password, ConnectionPool connectionPool) throws DatabaseException
-    {
+    static ArrayList<Order> getAllOrders(ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
-        User user = null;
+        ArrayList<Order> orderList = new ArrayList<>();
 
-        String sql = "SELECT * FROM user WHERE email = ? AND password = ?";
+        String sql = "SELECT * from orders)";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
-                ps.setString(1, email);
-                ps.setString(2, password);
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
 
-                if (rs.next())
-                {
-                    int balance = rs.getInt("balance");
+                while (rs.next()) {
+                    int orderID = rs.getInt("idorders");
+                    int userID = rs.getInt("userid");
+                    int totalPrice = rs.getInt("totalPrice");
+                    Timestamp timestamp = rs.getTimestamp("time");
 
-                    String name = rs.getString("name");
-                    boolean isAdmin = rs.getBoolean("isAdmin");
-                    user = new User(name, email, password, isAdmin, balance);
-                } else
-                {
-                    throw new DatabaseException("Wrong username or password");
+                    Order order = new Order(orderID, userID, totalPrice, timestamp);
+
+
                 }
             }
-        } catch (SQLException ex)
-        {
-            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
         }
-        return user;
+        return orderList;
     }
 
-    static User createUser(String name, String email, String password, int balance, ConnectionPool connectionPool) throws DatabaseException
+    private static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool)
     {
-        Logger.getLogger("web").log(Level.INFO, "");
-        User user;
-        String sql = "insert into user (name,email,password,balance) values (?,?,?,?)";
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
-                ps.setString(1, name);
-                ps.setString(2, email);
-                ps.setString(3, password);
-                ps.setInt(4,balance);
-                int rowsAffected = ps.executeUpdate();
-                if (rowsAffected == 1)
-                {
-                    user = new User(name, email, password,false ,balance);
-                } else
-                {
-                    throw new DatabaseException("The user with name = " + name + " could not be inserted into the database");
-                }
-            }
-        }
-        catch (SQLException ex)
-        {
-            throw new DatabaseException(ex, "Could not insert user into database");
-        }
-        return user;
+        ArrayList<Cupcake> cupcakeList = new ArrayList<>();
+
+        return cupcakeList;
     }
+
 
 }
