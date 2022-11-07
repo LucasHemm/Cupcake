@@ -45,7 +45,7 @@ public class Login extends HttpServlet
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
             System.out.println(user.getEmail());
-            request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
         }
         catch (DatabaseException e)
         {

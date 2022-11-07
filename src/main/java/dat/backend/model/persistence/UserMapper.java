@@ -66,7 +66,7 @@ class UserMapper {
 
         ArrayList<User> userList = new ArrayList<>();
 
-        String sql = "SELECT * from user)";
+        String sql = "SELECT * from user";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -79,7 +79,7 @@ class UserMapper {
                     String password = rs.getString("password");
                     int balance = rs.getInt("balance");
                     boolean isAdmin = rs.getBoolean("isAdmin");
-                    if(!isAdmin) {
+                    if (!isAdmin) {
                         User user = new User(name, email, password, isAdmin, balance);
                         userList.add(user);
                     }
@@ -91,11 +91,12 @@ class UserMapper {
         return userList;
     }
 
-    static void addMoneyToAccount(int userID, int amount, ConnectionPool connectionPool) throws DatabaseException {
+    static void addMoneyToAccount(String email, int amount, ConnectionPool connectionPool) throws DatabaseException {
 
         Logger.getLogger("web").log(Level.INFO, "");
+        int userID = OrderMapper.getUserIDFromEmail(email, connectionPool);
 
-        User user = getUserFromId(userID,connectionPool);
+        User user = getUserFromId(userID, connectionPool);
 
         String sql = "insert into user (balance) values (?) where iduser=?";
 

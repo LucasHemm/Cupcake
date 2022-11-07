@@ -17,8 +17,8 @@ public class UserFacade
         return UserMapper.createUser(name, email, password, balance, connectionPool);
     }
 
-    public static void addMoneyToAccount(int userID, int amount, ConnectionPool connectionPool) throws DatabaseException {
-        UserMapper.addMoneyToAccount(userID, amount, connectionPool);
+    public static void addMoneyToAccount(String email, int amount, ConnectionPool connectionPool) throws DatabaseException {
+        UserMapper.addMoneyToAccount(email, amount, connectionPool);
     }
 
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {

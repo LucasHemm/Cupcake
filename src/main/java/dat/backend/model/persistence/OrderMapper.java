@@ -16,7 +16,7 @@ public class OrderMapper {
 
         ArrayList<Order> orderList = new ArrayList<>();
 
-        String sql = "SELECT * from orders)";
+        String sql = "SELECT * from orders";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -31,6 +31,7 @@ public class OrderMapper {
                     Order order = new Order(orderID, userID, totalPrice, timestamp);
                     order.setOrderList(getCupcakeFromOrderID(orderID, connectionPool));
                     orderList.add(order);
+
                 }
             }
         } catch (SQLException ex) {
@@ -46,7 +47,7 @@ public class OrderMapper {
 
         ArrayList<Cupcake> cupcakeList = new ArrayList<>();
 
-        String sql = "SELECT * from cupcake where idorders=?)";
+        String sql = "SELECT * from cupcake where orderid=?";
 
 
         try (Connection connection = connectionPool.getConnection()) {
@@ -55,13 +56,11 @@ public class OrderMapper {
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
-
                     Topping topping = getToppingFromID(rs.getInt("toppingid"), connectionPool);
                     Bottom bottom = getBottomFromID(rs.getInt("bottomid"), connectionPool);
                     int price = rs.getInt("price");
                     int amount = rs.getInt("amount");
                     Cupcake cupcake = new Cupcake(topping, bottom, price, orderID, amount);
-
                 }
             }
         } catch (SQLException ex) {
@@ -74,7 +73,7 @@ public class OrderMapper {
     private static Topping getToppingFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
 
         Logger.getLogger("web").log(Level.INFO, "");
-        String sql = "SELECT * from toppings where idtoppings=?)";
+        String sql = "SELECT * from toppings where idtoppings=?";
         Topping topping = null;
 
 
@@ -101,7 +100,7 @@ public class OrderMapper {
         Logger.getLogger("web").log(Level.INFO, "");
         Bottom bottom = null;
 
-        String sql = "SELECT * from bottoms where idbottoms=?)";
+        String sql = "SELECT * from bottoms where idbottoms=?";
         Topping topping = null;
 
 
@@ -136,5 +135,53 @@ public class OrderMapper {
             throwables.printStackTrace();
         }
 
+    }
+
+    static ArrayList<Order> getOrdersFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        int userID = getUserIDFromEmail(email,connectionPool);
+        ArrayList<Order> orderList = new ArrayList<>();
+
+        String sql = "SELECT * from orders where userid=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1,userID);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    int orderID = rs.getInt("idorders");
+                    int totalPrice = rs.getInt("totalPrice");
+                    Timestamp timestamp = rs.getTimestamp("time");
+                    Order order = new Order(orderID, userID, totalPrice, timestamp);
+                    order.setOrderList(getCupcakeFromOrderID(orderID, connectionPool));
+                    orderList.add(order);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return orderList;
+    }
+
+    static int getUserIDFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
+        int ID = 0;
+
+        String sql = "SELECT * from user where email=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1,email);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    ID = rs.getInt("iduser");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return ID;
     }
 }

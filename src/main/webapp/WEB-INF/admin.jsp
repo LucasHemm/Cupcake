@@ -5,24 +5,66 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage YOU DID it you bastard it finally worked
+         <p>You are logged in as "${sessionScope.user.email}".</p>
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
-        Welcome to the frontpage
-    </jsp:attribute>
 
     <jsp:body>
-
-        <p>Startcode for 2nd semester </p>
-
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
-        </c:if>
 
         <c:if test="${sessionScope.user == null}">
             <p>You are not logged in yet. You can do it here: <a
                     href="login.jsp">Login</a></p>
+        </c:if>
+
+        <form>
+            <table>
+                <th>
+                    <button formaction="admin" formmethod="get" name="item" value="order">Orders</button>
+                </th>
+                <th>
+                    <button formaction="admin" formmethod="get" name="item" value="user">Users</button>
+                </th>
+            </table>
+        </form>
+
+        <c:if test="${item=='user'}">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <c:forEach var="user" items="${requestScope.userList}">
+                    <tr>
+                        <td>${user.email}</td>
+                        <td>
+                            <button formaction="#" formmethod="post" name="email" value="${user.email}">See orders</button>
+                            <button formaction="#" formmethod="post" name="email" value="${user.email}">Add money</button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+
+        <c:if test="${item=='order'}">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <c:forEach var="order" items="${requestScope.orderList}">
+                    <tr>
+                        <td>${order.orderid}</td>
+                        <td>
+                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete</button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </c:if>
 
     </jsp:body>
