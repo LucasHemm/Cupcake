@@ -27,10 +27,10 @@
 
 
             <select name="bottoms" id="bottoms">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+                <c:forEach var="item" items="${sessionScope.bottomList}">
+                        <option value="${item.type}">${item.type}</option>
+
+                </c:forEach>
             </select>
 
 

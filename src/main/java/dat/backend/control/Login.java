@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.CupcakeFacade;
 import dat.backend.model.persistence.UserFacade;
 import dat.backend.model.persistence.ConnectionPool;
 
@@ -40,6 +41,8 @@ public class Login extends HttpServlet
         session.setAttribute("user", null); // invalidating user object in session scope
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        session.setAttribute("bottomList", CupcakeFacade.getbottoms(connectionPool));
+        session.setAttribute("toppingList", CupcakeFacade.gettoppings(connectionPool));
 
         try
         {

@@ -45,7 +45,7 @@ public class CupcakeMapper {
         List<Bottom> BottomList = new ArrayList<>();
 
 
-        String sql = "select * from toppings";
+        String sql = "select * from bottoms";
 
         try (Connection connection = connectionPool.getConnection()) {
 
