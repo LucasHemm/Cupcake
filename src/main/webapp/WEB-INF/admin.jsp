@@ -18,12 +18,17 @@
 
         <form>
             <table>
-                <th>
+                <td>
                     <button formaction="admin" formmethod="get" name="item" value="order">Orders</button>
-                </th>
-                <th>
+                </td>
+
+                <td>
                     <button formaction="admin" formmethod="get" name="item" value="user">Users</button>
-                </th>
+                </td>
+
+                <td>
+                    <button formaction="admin" formmethod="get" name="item" value="graphs">Statistics</button>
+                </td>
             </table>
         </form>
 
@@ -51,7 +56,8 @@
                                 <label for="amount">Amount for depositing to the user's account:</label><br>
                                 <input type="number" id="amount" name="amount" min="1" max="999"><br>
                                 <br>
-                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}">Add money
+                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}">Add
+                                    money
                                 </button>
                             </td>
                         </tr>
@@ -73,8 +79,11 @@
                     <tr>
                         <td>${order.orderid}</td>
                         <td>
-                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete
-                            </button>
+                            <form>
+                                <button formaction="deleteOrder" formmethod="post" name="orderID"
+                                        value="${order.orderid}">Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -93,13 +102,35 @@
                     <tr>
                         <td>${order.orderid}</td>
                         <td>
-                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete
-                            </button>
+                            <form>
+                                <button formaction="deleteOrder" formmethod="post" name="orderID"
+                                        value="${order.orderid}">Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
         </c:if>
+
+        <c:if test="${item=='graphs'}">
+            <div class="chart-wrap vertical">
+                <h2 class="title">Bar Chart HTML Example:  Using Only HTML And CSS</h2>
+
+                <div class="grid">
+                    <div class="bar" style="--bar-value:85%;" data-name="Your Blog" title="Your Blog 85%"></div>
+                    <div class="bar" style="--bar-value:23%;" data-name="Medium" title="Medium 23%"></div>
+                    <div class="bar" style="--bar-value:7%;" data-name="Tumblr" title="Tumblr 7%"></div>
+                    <div class="bar" style="--bar-value:38%;" data-name="Facebook" title="Facebook 38%"></div>
+                    <div class="bar" style="--bar-value:35%;" data-name="YouTube" title="YouTube 35%"></div>
+                    <div class="bar" style="--bar-value:30%;" data-name="LinkedIn" title="LinkedIn 30%"></div>
+                    <div class="bar" style="--bar-value:5%;" data-name="Twitter" title="Twitter 5%"></div>
+                    <div class="bar" style="--bar-value:20%;" data-name="Other" title="Other 20%"></div>
+                </div>
+            </div>
+        </c:if>
+
+
 
     </jsp:body>
 

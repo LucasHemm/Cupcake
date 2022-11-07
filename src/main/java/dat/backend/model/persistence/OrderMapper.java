@@ -123,7 +123,10 @@ public class OrderMapper {
     }
 
     static void deleteOrderFromID(int id, ConnectionPool connectionPool) {
-        String sql = "delete from order where idorders = ?";
+
+        deleteCupcakesFromOrderID(id, connectionPool);
+
+        String sql = "delete from orders where idorders = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -183,5 +186,20 @@ public class OrderMapper {
             throw new DatabaseException(ex, "No users were found");
         }
         return ID;
+    }
+
+    private static void deleteCupcakesFromOrderID(int id, ConnectionPool connectionPool)
+    {
+        String sql = "delete from cupcake where orderid = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }
