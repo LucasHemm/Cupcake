@@ -5,7 +5,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the logged in area
+         Velkommen ombord
     </jsp:attribute>
 
     <jsp:attribute name="footer">
@@ -14,11 +14,51 @@
 
     <jsp:body>
 
-        <p>You should be logged in now</p>
+        <br>
+        <h3>Øens bedste cupcakes. Vælg og bestil her:</h3>
 
         <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user.role}".</p>
+            <p>You are logged in with the role of admin is ="${sessionScope.user.admin}".</p>
         </c:if>
+
+        <form action="post">
+
+            <label for="bottoms">Choose a bottom:</label>
+
+
+            <select name="bottoms" id="bottoms">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+
+
+            <label for="toppings">Choose a topping:</label>
+
+            <select name="toppings" id="toppings">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+
+            <label for="cars">Choose a car:</label>
+
+            <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+            </select>
+
+        </form>
+<%--        <c:forEach var="item" items="${requestScope.itemList}">--%>
+<%--            <c:if test="${item.done == true}">--%>
+<%--               --%>
+<%--            </c:if>--%>
+<%--        </c:forEach>--%>
+
 
         <c:if test="${sessionScope.user == null}">
             <p>You are not logged in yet. You can do it here: <a

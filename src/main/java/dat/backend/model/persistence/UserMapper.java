@@ -28,7 +28,6 @@ class UserMapper
                 if (rs.next())
                 {
                     int balance = rs.getInt("balance");
-
                     String name = rs.getString("name");
                     boolean isAdmin = rs.getBoolean("isAdmin");
                     user = new User(name, email, password, isAdmin, balance);

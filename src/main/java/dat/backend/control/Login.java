@@ -34,14 +34,18 @@ public class Login extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope
-        String username = request.getParameter("username");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         try
         {
-            User user = UserFacade.login(username, password, connectionPool);
+            User user = UserFacade.login(email, password, connectionPool);
+            System.out.println(user);
+            System.out.println(user.getBalance() + user.getName());
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
             request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
