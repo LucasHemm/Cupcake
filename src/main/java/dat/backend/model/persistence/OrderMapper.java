@@ -1,8 +1,6 @@
 package dat.backend.model.persistence;
 
-import dat.backend.model.entities.Cupcake;
-import dat.backend.model.entities.Order;
-import dat.backend.model.entities.User;
+import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.sql.*;
@@ -31,8 +29,8 @@ public class OrderMapper {
                     Timestamp timestamp = rs.getTimestamp("time");
 
                     Order order = new Order(orderID, userID, totalPrice, timestamp);
-
-
+                    order.setOrderList(getCupcakeFromOrderID(orderID, connectionPool));
+                    orderList.add(order);
                 }
             }
         } catch (SQLException ex) {
@@ -41,12 +39,102 @@ public class OrderMapper {
         return orderList;
     }
 
-    private static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool)
-    {
+    private static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool) throws DatabaseException {
+
+
+        Logger.getLogger("web").log(Level.INFO, "");
+
         ArrayList<Cupcake> cupcakeList = new ArrayList<>();
+
+        String sql = "SELECT * from cupcake where idorders=?)";
+
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, orderID);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+
+                    Topping topping = getToppingFromID(rs.getInt("toppingid"), connectionPool);
+                    Bottom bottom = getBottomFromID(rs.getInt("bottomid"), connectionPool);
+                    int price = rs.getInt("price");
+                    int amount = rs.getInt("amount");
+                    Cupcake cupcake = new Cupcake(topping, bottom, price, orderID, amount);
+
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
 
         return cupcakeList;
     }
 
+    private static Topping getToppingFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
 
+        Logger.getLogger("web").log(Level.INFO, "");
+        String sql = "SELECT * from toppings where idtoppings=?)";
+        Topping topping = null;
+
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+
+                    String type = rs.getString("type");
+                    int price = rs.getInt("price");
+                    topping = new Topping(id, type, price);
+
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return topping;
+    }
+
+    private static Bottom getBottomFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        Bottom bottom = null;
+
+        String sql = "SELECT * from bottoms where idbottoms=?)";
+        Topping topping = null;
+
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+
+                    String type = rs.getString("type");
+                    int price = rs.getInt("price");
+                    bottom = new Bottom(id, type, price);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return bottom;
+    }
+
+    static void deleteOrderFromID(int id, ConnectionPool connectionPool) {
+        String sql = "delete from order where idorders = ?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, id);
+                ps.executeUpdate();
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

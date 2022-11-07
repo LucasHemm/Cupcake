@@ -79,9 +79,10 @@ class UserMapper {
                     String password = rs.getString("password");
                     int balance = rs.getInt("balance");
                     boolean isAdmin = rs.getBoolean("isAdmin");
-                    User user = new User(name, email, password, isAdmin, balance);
-                    userList.add(user);
-
+                    if(!isAdmin) {
+                        User user = new User(name, email, password, isAdmin, balance);
+                        userList.add(user);
+                    }
                 }
             }
         } catch (SQLException ex) {
@@ -141,8 +142,4 @@ class UserMapper {
         }
         return user;
     }
-
-
-
-
 }
