@@ -27,24 +27,37 @@
             </table>
         </form>
 
+
         <c:if test="${item=='user'}">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th>E-mail</th>
-                    <th>Options</th>
-                </tr>
-                </thead>
-                <c:forEach var="user" items="${requestScope.userList}">
+            <form>
+                <table class="table table-striped">
+                    <thead>
                     <tr>
-                        <td>${user.email}</td>
-                        <td>
-                            <button formaction="#" formmethod="post" name="email" value="${user.email}">See orders</button>
-                            <button formaction="#" formmethod="post" name="email" value="${user.email}">Add money</button>
-                        </td>
+                        <th>E-mail</th>
+                        <th>Options</th>
                     </tr>
-                </c:forEach>
-            </table>
+                    </thead>
+                    <c:forEach var="user" items="${requestScope.userList}">
+                        <tr>
+                            <td>${user.email}</td>
+                            <td>
+
+                                <button formaction="userOrders" formmethod="post" name="email" value="${user.email}">See
+                                    orders
+                                </button>
+
+                            </td>
+                            <td>
+                                <label for="amount">Amount for depositing to the user's account:</label><br>
+                                <input type="number" id="amount" name="amount" min="1" max="999"><br>
+                                <br>
+                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}">Add money
+                                </button>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </form>
         </c:if>
 
 
@@ -60,7 +73,28 @@
                     <tr>
                         <td>${order.orderid}</td>
                         <td>
-                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete</button>
+                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete
+                            </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+        <c:if test="${item=='userOrder'}">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <c:forEach var="order" items="${requestScope.orderList}">
+                    <tr>
+                        <td>${order.orderid}</td>
+                        <td>
+                            <button formaction="#" formmethod="post" name="orderID" value="${order.orderid}">Delete
+                            </button>
                         </td>
                     </tr>
                 </c:forEach>

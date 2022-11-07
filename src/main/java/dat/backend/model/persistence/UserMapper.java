@@ -98,7 +98,7 @@ class UserMapper {
 
         User user = getUserFromId(userID, connectionPool);
 
-        String sql = "insert into user (balance) values (?) where iduser=?";
+        String sql = "update user set balance = ? where iduser=?;";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
