@@ -11,7 +11,7 @@ public class CupcakeMapper {
 
     public static List<Topping> getToppings(ConnectionPool connectionPool) {
 
-        List<Topping> itemList = new ArrayList<>();
+        List<Topping> ToppingList = new ArrayList<>();
 
 
         String sql = "select * from toppings";
@@ -21,19 +21,14 @@ public class CupcakeMapper {
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
 
-                ps.setString(1,username1);
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
-                    int id = rs.getInt("item_id");
-                    String name = rs.getString("name");
-                    boolean done = rs.getBoolean("done");
-                    Timestamp created = rs.getTimestamp("created");
-                    String username = rs.getString("username");
+                    int toppingid = rs.getInt("idtoppings");
+                    String type = rs.getString("type");
+                    int price = rs.getInt("price");
 
-                    Item newItem = new Item(id, name, done, created, username);
-                    itemList.add(newItem);
-
-
+                    Topping newTopping = new Topping(toppingid, type, price);
+                    ToppingList.add(newTopping);
                 }
 
             } catch (SQLException throwables) {
@@ -42,12 +37,37 @@ public class CupcakeMapper {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return itemList;
+        return ToppingList;
     }
 
     public static List<Bottom> getBottoms(ConnectionPool connectionPool) {
 
+        List<Bottom> BottomList = new ArrayList<>();
 
 
+        String sql = "select * from toppings";
+
+        try (Connection connection = connectionPool.getConnection()) {
+
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    int bottomid = rs.getInt("idbottoms");
+                    String type = rs.getString("type");
+                    int price = rs.getInt("price");
+
+                    Bottom newBottom = new Bottom(bottomid, type, price);
+                    BottomList.add(newBottom);
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return BottomList;
     }
 }
