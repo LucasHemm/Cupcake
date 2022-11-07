@@ -9,15 +9,15 @@ import java.util.List;
 
 public class CupcakeFacade {
 
-    public static List<Topping> getbottoms(ConnectionPool connectionPool){
-
-
-        return CupcakeMapper.getToppings(connectionPool);
-    }
-    public static List<Bottom> gettoppings(ConnectionPool connectionPool){
+    public static List<Bottom> getbottoms(ConnectionPool connectionPool){
 
 
         return CupcakeMapper.getBottoms(connectionPool);
+    }
+    public static List<Topping> gettoppings(ConnectionPool connectionPool){
+
+
+        return CupcakeMapper.getToppings(connectionPool);
     }
 
 }

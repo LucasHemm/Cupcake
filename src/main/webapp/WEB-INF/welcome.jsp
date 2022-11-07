@@ -21,14 +21,15 @@
             <p>You are logged in with the role of admin is ="${sessionScope.user.admin}".</p>
         </c:if>
 
-        <form action="post">
+        <form action="#" method="post">
+<%--            ***************^^^^^^^^^^^^^^^^--%>
 
             <label for="bottoms">Choose a bottom:</label>
 
 
-            <select name="bottoms" id="bottoms">
+            <select name="bottoms" id="bottoms" value="Bottoms">
                 <c:forEach var="item" items="${sessionScope.bottomList}">
-                        <option value="${item.type}">${item.type}</option>
+                    <option value="${item.type}">${item.type}</option>
 
                 </c:forEach>
             </select>
@@ -36,28 +37,25 @@
 
             <label for="toppings">Choose a topping:</label>
 
-            <select name="toppings" id="toppings">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
+            <select name="toppings" id="toppings" value="Toppings">
+                <c:forEach var="item" items="${sessionScope.toppingList}">
+                    <option value="${item.type}">${item.type}</option>
+
+                </c:forEach>
             </select>
 
-            <label for="cars">Choose a car:</label>
+            <label for="amount">Amount:</label>
 
-            <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
+            <input type="text" id="amount" name="amount"/>
+
+            <button type="submit" class="btn btn-primary">Læg i kurv</button>
 
         </form>
-<%--        <c:forEach var="item" items="${requestScope.itemList}">--%>
-<%--            <c:if test="${item.done == true}">--%>
-<%--               --%>
-<%--            </c:if>--%>
-<%--        </c:forEach>--%>
+        <%--        <c:forEach var="item" items="${requestScope.itemList}">--%>
+        <%--            <c:if test="${item.done == true}">--%>
+        <%--               --%>
+        <%--            </c:if>--%>
+        <%--        </c:forEach>--%>
 
 
         <c:if test="${sessionScope.user == null}">
