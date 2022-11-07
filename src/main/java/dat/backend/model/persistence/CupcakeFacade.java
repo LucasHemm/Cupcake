@@ -12,12 +12,12 @@ public class CupcakeFacade {
     public static List<Topping> getbottoms(ConnectionPool connectionPool){
 
 
-        return CupcakeMapper.getItems(username,connectionPool);
+        return CupcakeMapper.getToppings(connectionPool);
     }
     public static List<Bottom> gettoppings(ConnectionPool connectionPool){
 
 
-        return CupcakeMapper.getItems(username,connectionPool);
+        return CupcakeMapper.getBottoms(connectionPool);
     }
 
 }
