@@ -43,7 +43,7 @@
                     </c:if>
                     <div class="me-auto">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
-                                src="${pageContext.request.contextPath}/images/basket.png" width="50" height="60"></a>
+                                src="${pageContext.request.contextPath}/images/basket.png" width="30" height="40"></a>
                     </div>
                 </div>
             </div>
