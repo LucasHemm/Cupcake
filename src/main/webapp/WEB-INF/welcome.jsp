@@ -29,7 +29,7 @@
 
             <select name="bottoms" id="bottoms" value="Bottoms">
                 <c:forEach var="item" items="${sessionScope.bottomList}">
-                    <option value="${item.type}">${item.type}</option>
+                    <option value="${item.bottomid}">${item.type}</option>
 
                 </c:forEach>
             </select>
@@ -39,14 +39,14 @@
 
             <select name="toppings" id="toppings" value="Toppings">
                 <c:forEach var="item" items="${sessionScope.toppingList}">
-                    <option value="${item.type}">${item.type}</option>
+                    <option value="${item.toppingid}">${item.type}</option>
 
                 </c:forEach>
             </select>
 
             <label for="amount">Amount:</label>
 
-            <input type="text" id="amount" name="amount"/>
+            <input type="number" id="amount" name="amount" min="1" max="100"/>
 
             <button type="submit" class="btn btn-primary">Læg i kurv</button>
 
