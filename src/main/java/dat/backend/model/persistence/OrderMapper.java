@@ -71,7 +71,7 @@ public class OrderMapper {
         return cupcakeList;
     }
 
-    private static Topping getToppingFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
+    static Topping getToppingFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
 
         Logger.getLogger("web").log(Level.INFO, "");
         String sql = "SELECT * from toppings where idtoppings=?";
@@ -97,7 +97,7 @@ public class OrderMapper {
         return topping;
     }
 
-    private static Bottom getBottomFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
+    static Bottom getBottomFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
         Bottom bottom = null;
 
@@ -225,5 +225,26 @@ public class OrderMapper {
             throw new DatabaseException(ex, "No users were found");
         }
         return order;
+    }
+
+
+    public static int getOrderID(ConnectionPool connectionPool) throws DatabaseException {
+        int orderID = 1;
+
+        String sql = "SELECT * from orders";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ResultSet rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    orderID++;
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return orderID;
+
     }
 }

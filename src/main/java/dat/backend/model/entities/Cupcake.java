@@ -16,6 +16,12 @@ public class Cupcake {
         this.orderid = orderid;
         this.amount = amount;
     }
+    public Cupcake(Topping topping, Bottom bottom, int price, int amount) {
+        this.topping = topping;
+        this.bottom = bottom;
+        this.price = price;
+        this.amount = amount;
+    }
 
 
     public Topping getTopping() {

@@ -21,13 +21,13 @@
             <p>You are logged in with the role of admin is ="${sessionScope.user.admin}".</p>
         </c:if>
 
-        <form action="#" method="post">
-<%--            ***************^^^^^^^^^^^^^^^^--%>
+        <form action="addToBasket" method="post">
+
 
             <label for="bottoms">Choose a bottom:</label>
 
 
-            <select name="bottoms" id="bottoms" value="Bottoms">
+            <select name="bottom" id="bottoms" value="Bottoms">
                 <c:forEach var="item" items="${sessionScope.bottomList}">
                     <option value="${item.bottomid}">${item.type}</option>
 
@@ -37,7 +37,7 @@
 
             <label for="toppings">Choose a topping:</label>
 
-            <select name="toppings" id="toppings" value="Toppings">
+            <select name="topping" id="toppings" value="Toppings">
                 <c:forEach var="item" items="${sessionScope.toppingList}">
                     <option value="${item.toppingid}">${item.type}</option>
 
@@ -46,7 +46,7 @@
 
             <label for="amount">Amount:</label>
 
-            <input type="number" id="amount" name="amount" min="1" max="100"/>
+            <input type="number" id="amount" name="amount" min="1" max="100" value="1"/>
 
             <button type="submit" class="btn btn-primary">Læg i kurv</button>
 

@@ -113,7 +113,7 @@ class UserMapper {
     }
 
 
-    private static User getUserFromId(int ID, ConnectionPool connectionPool) throws DatabaseException {
+    static User getUserFromId(int ID, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
         User user = null;

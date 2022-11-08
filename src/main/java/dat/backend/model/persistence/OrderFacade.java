@@ -1,8 +1,6 @@
 package dat.backend.model.persistence;
 
-import dat.backend.model.entities.Cupcake;
-import dat.backend.model.entities.Order;
-import dat.backend.model.entities.User;
+import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
 
 import java.util.ArrayList;
@@ -27,4 +25,15 @@ public class OrderFacade {
     public static Order getOrderFromOrderID(int id, ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getOrdersFromOrderID(id, connectionPool);
     }
+
+    public static Bottom getBottomFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getBottomFromID(id,connectionPool);
+    }
+    public static Topping getToppingFromID(int id, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getToppingFromID(id,connectionPool);
+    }
+    public static int getOrderID(ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getOrderID(connectionPool);
+    }
+
 }

@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Basket;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.CupcakeFacade;
@@ -43,6 +44,8 @@ public class Login extends HttpServlet
         String password = request.getParameter("password");
         session.setAttribute("bottomList", CupcakeFacade.getbottoms(connectionPool));
         session.setAttribute("toppingList", CupcakeFacade.gettoppings(connectionPool));
+        Basket basket = new Basket();
+        session.setAttribute("basket",basket);
 
         try
         {
@@ -51,7 +54,14 @@ public class Login extends HttpServlet
             System.out.println(user.getBalance() + user.getName());
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
-            request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+
+            if(user.isAdmin()) {
+                request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request, response);
+            }
+            else
+                request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+
+
         }
         catch (DatabaseException e)
         {

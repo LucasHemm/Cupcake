@@ -20,6 +20,10 @@ public class Order {
         this.time = time;
     }
 
+    public Order() {
+
+    }
+
     public int getOrderid() {
         return orderid;
     }

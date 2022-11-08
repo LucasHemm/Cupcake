@@ -24,4 +24,8 @@ public class UserFacade
     public static ArrayList<User> getAllUsers(ConnectionPool connectionPool) throws DatabaseException {
         return UserMapper.getAllUsers(connectionPool);
     }
+
+    public static User getUserFromId(int id, ConnectionPool connectionPool){
+        return getUserFromId(id,connectionPool);
+    }
 }

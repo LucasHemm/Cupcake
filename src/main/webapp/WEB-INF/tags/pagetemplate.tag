@@ -54,9 +54,9 @@
             <div class="collapse navbar-collapse justify-content-end">
                 <c:if test="${sessionScope.user != null }">
                     <p>${sessionScope.user.email}</p>
-                </c:if>
-                <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
+                <a class="nav-item nav-link" href="${pageContext.request.contextPath}/basketServlet"><img
                         src="${pageContext.request.contextPath}/images/basket.png" width="30" height="40"></a>
+                </c:if>
             </div>
         </div>
     </nav>

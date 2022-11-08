@@ -62,13 +62,6 @@ public class User
         this.password = password;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
 
     @Override
     public boolean equals(Object o)
