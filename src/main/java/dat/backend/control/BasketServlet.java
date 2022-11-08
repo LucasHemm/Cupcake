@@ -23,7 +23,7 @@ public class BasketServlet extends HttpServlet {
             orderList = new TreeSet<>();
         }
 
-        Set<String> orderListeReq = (Set<String>) request.getAttribute("emneListeReq");
+        Set<String> orderListeReq = (Set<String>) request.getAttribute("orderListeReq");
 
         if (orderListeReq == null) {
             System.out.println("Listen på request scope fandtes ikke");
