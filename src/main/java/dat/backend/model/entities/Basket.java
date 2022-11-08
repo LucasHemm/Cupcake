@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Basket {
 
-    ArrayList<Cupcake> cupcakeArrayList = new ArrayList<>();
-    int sum;
+    private ArrayList<Cupcake> cupcakeArrayList = new ArrayList<>();
+    private int sum;
 
 
     public ArrayList<Cupcake> getCupcakeArrayList() {
