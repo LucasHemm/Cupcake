@@ -1,5 +1,6 @@
 package dat.backend.model.persistence;
 
+import dat.backend.model.entities.Cupcake;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
@@ -17,5 +18,9 @@ public class OrderFacade {
 
     public static ArrayList<Order> getOrdersFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getOrdersFromEmail(email, connectionPool);
+    }
+
+    public static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getCupcakeFromOrderID(orderID,connectionPool);
     }
 }

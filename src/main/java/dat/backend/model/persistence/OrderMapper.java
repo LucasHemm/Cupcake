@@ -40,7 +40,7 @@ public class OrderMapper {
         return orderList;
     }
 
-    private static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool) throws DatabaseException {
+    static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool) throws DatabaseException {
 
 
         Logger.getLogger("web").log(Level.INFO, "");
@@ -137,7 +137,6 @@ public class OrderMapper {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     static ArrayList<Order> getOrdersFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
