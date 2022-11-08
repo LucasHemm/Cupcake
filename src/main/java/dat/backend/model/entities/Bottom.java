@@ -2,9 +2,9 @@ package dat.backend.model.entities;
 
 public class Bottom {
 
-    int bottomid;
-    String type;
-    int price;
+    private int bottomid;
+    private String type;
+    private int price;
 
 
     public Bottom(int bottomid, String type, int price) {

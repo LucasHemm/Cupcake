@@ -2,11 +2,11 @@ package dat.backend.model.entities;
 
 public class Cupcake {
 
-    Topping topping;
-    Bottom bottom;
-    int price;
-    int orderid;
-    int amount;
+    private Topping topping;
+    private Bottom bottom;
+    private int price;
+    private int orderid;
+    private int amount;
 
 
     public Cupcake(Topping topping, Bottom bottom, int price, int orderid, int amount) {
@@ -16,6 +16,7 @@ public class Cupcake {
         this.orderid = orderid;
         this.amount = amount;
     }
+
     public Cupcake(Topping topping, Bottom bottom, int price, int amount) {
         this.topping = topping;
         this.bottom = bottom;
@@ -62,6 +63,10 @@ public class Cupcake {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public int calcPrice() {
+        return (topping.getPrice() + bottom.getPrice()) * amount;
     }
 }
 

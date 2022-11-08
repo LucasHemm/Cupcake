@@ -63,4 +63,13 @@ public class Order {
     public void setCupcakeList(List<Cupcake> cupcakeList) {
         this.cupcakeList = cupcakeList;
     }
+
+    public int calcTotalprice() {
+        totalprice = 0;
+
+        for (Cupcake c : cupcakeList) {
+            totalprice += c.calcPrice();
+        }
+        return totalprice;
+    }
 }

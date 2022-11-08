@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Basket {
 
     ArrayList<Cupcake> cupcakeArrayList = new ArrayList<>();
+    int sum;
 
 
     public ArrayList<Cupcake> getCupcakeArrayList() {
@@ -20,7 +21,14 @@ public class Basket {
     }
 
 
+    public int calcTotalprice() {
+        sum = 0;
 
+        for (Cupcake c : cupcakeArrayList) {
+            sum += c.calcPrice();
+        }
+        return sum;
+    }
 
 
 
