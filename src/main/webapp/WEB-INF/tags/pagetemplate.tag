@@ -39,7 +39,9 @@
             </button>
             <div class="collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/WEB-INF/Test.jsp">Page 2</a>
+                    <c:if test="${sessionScope.user != null }">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/WEB-INF/Test.jsp">Profile</a>
+                    </c:if>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
                     <c:if test="${sessionScope.user == null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
