@@ -24,7 +24,14 @@
             <p>You are not logged in yet. You can do it here: <a
                     href="login.jsp">Login</a></p>
         </c:if>
+        <br/>
+        <c:if test="${sessionScope.user == null}">
+            <p>If you are not already a customer, sign up here: <a
+                    href="createUser">Sign up</a></p>
+        </c:if>
 
     </jsp:body>
 
 </t:pagetemplate>
+
+a${x.bottom} bottom with ${x.topping}topping
