@@ -42,7 +42,7 @@
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
                     <div class="me-auto">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
+                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/BasketServlet"><img
                                 src="${pageContext.request.contextPath}/images/basket.png" width="30" height="40"></a>
                     </div>
                 </div>
