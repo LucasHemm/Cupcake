@@ -12,7 +12,7 @@
     <jsp:body>
 
 
-        <form action="BasketServlet">
+        <form action="BasketServlet" method="get">
             <table class="table table-striped">
                 <thead>
                 <tr>

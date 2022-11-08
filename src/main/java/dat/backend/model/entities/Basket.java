@@ -69,11 +69,15 @@ public class Basket {
             capacity = cart.length;
         }
 
-    public void removeCupcake() {
-
+    public ArrayList removeCupcake() {
+        if (cupcakeArrayList != null) {
+            cupcakeArrayList.remove(1);
+        }
+        return cupcakeArrayList;
     }
 
     public void editAmount() {
+
 
     }
 }
