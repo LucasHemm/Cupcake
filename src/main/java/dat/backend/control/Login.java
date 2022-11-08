@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.CupcakeFacade;
 import dat.backend.model.persistence.UserFacade;
 import dat.backend.model.persistence.ConnectionPool;
 
@@ -34,17 +35,22 @@ public class Login extends HttpServlet
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
     {
         response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         session.setAttribute("user", null); // invalidating user object in session scope
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        session.setAttribute("bottomList", CupcakeFacade.getbottoms(connectionPool));
+        session.setAttribute("toppingList", CupcakeFacade.gettoppings(connectionPool));
 
         try
         {
             User user = UserFacade.login(email, password, connectionPool);
+            System.out.println(user);
+            System.out.println(user.getBalance() + user.getName());
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
-            System.out.println(user.getEmail());
             request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
         }
         catch (DatabaseException e)

@@ -34,7 +34,13 @@ public class User
         this.balance = balance;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     public String getEmail()
     {
@@ -56,6 +62,13 @@ public class User
         this.password = password;
     }
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     @Override
     public boolean equals(Object o)
@@ -78,6 +91,6 @@ public class User
         return "User{" +
                 "brugerNavn='" + email + '\'' +
                 ", kodeord='" + password + '\'' +
-                ", rolle='";
+                ", rolle=";
     }
 }

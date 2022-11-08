@@ -20,8 +20,14 @@
 </head>
 <body>
 <header>
-    <img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;"
-         class="img-fluid rounded mx-auto d-block"/>
+    <c:if test="${sessionScope.user != null }">
+    <a href="${pageContext.request.contextPath}/redirect"><img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;"
+         class="img-fluid rounded mx-auto d-block"/></a>
+    </c:if>
+    <c:if test="${sessionScope.user == null }">
+        <a href="index.jsp"><img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;"
+                                                class="img-fluid rounded mx-auto d-block"/></a>
+    </c:if>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <%--            <a class="navbar-brand" href="index.jsp">--%>
@@ -31,9 +37,11 @@
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse justify-content-start" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 2</a>
+                    <c:if test="${sessionScope.user != null}">
+                    <a class="nav-item nav-link" href="${pageContext.request.contextPath}/viewProfile">Profile</a>
+                    </c:if>
                     <a class="nav-item nav-link" href="${pageContext.request.contextPath}/">Page 3</a>
                     <c:if test="${sessionScope.user == null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
@@ -41,11 +49,14 @@
                     <c:if test="${sessionScope.user != null }">
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
-                    <div class="me-auto">
-                        <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
-                                src="${pageContext.request.contextPath}/images/basket.png" width="30" height="40"></a>
-                    </div>
                 </div>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end">
+                <c:if test="${sessionScope.user != null }">
+                    <p>${sessionScope.user.email}</p>
+                </c:if>
+                <a class="nav-item nav-link" href="${pageContext.request.contextPath}/"><img
+                        src="${pageContext.request.contextPath}/images/basket.png" width="30" height="40"></a>
             </div>
         </div>
     </nav>
