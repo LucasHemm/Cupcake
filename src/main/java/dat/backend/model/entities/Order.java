@@ -10,7 +10,7 @@ public class Order {
     int userid;
     int totalprice;
     Timestamp time;
-    List<Cupcake> orderList = new ArrayList<>();
+    List<Cupcake> cupcakeList = new ArrayList<>();
 
 
     public Order(int orderid, int userid, int totalprice, Timestamp time) {
@@ -52,11 +52,11 @@ public class Order {
         this.time = time;
     }
 
-    public List<Cupcake> getOrderList() {
-        return orderList;
+    public List<Cupcake> getCupcakeList() {
+        return cupcakeList;
     }
 
-    public void setOrderList(List<Cupcake> orderList) {
-        this.orderList = orderList;
+    public void setCupcakeList(List<Cupcake> cupcakeList) {
+        this.cupcakeList = cupcakeList;
     }
 }

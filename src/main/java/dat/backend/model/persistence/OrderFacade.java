@@ -23,4 +23,8 @@ public class OrderFacade {
     public static ArrayList<Cupcake> getCupcakeFromOrderID(int orderID, ConnectionPool connectionPool) throws DatabaseException {
         return OrderMapper.getCupcakeFromOrderID(orderID,connectionPool);
     }
+
+    public static Order getOrderFromOrderID(int id, ConnectionPool connectionPool) throws DatabaseException {
+        return OrderMapper.getOrdersFromOrderID(id, connectionPool);
+    }
 }

@@ -74,16 +74,42 @@
                 <thead>
                 <tr>
                     <th>Order ID</th>
+                    <th>Cupcakes</th>
                     <th>Options</th>
                 </tr>
                 </thead>
                 <c:forEach var="order" items="${requestScope.orderList}">
                     <tr>
                         <td>${order.orderid}</td>
-                        <td>
+                        <td><form>
+                            <c:if test="${pressed!='pressed'}">
+                                <button formaction="seeCupcakes" formmethod="post" name="orderID"
+                                        value="${order.orderid}">See
+                                    cupcakes
+                                </button>
+                            </c:if>
+                            <c:if test="${pressed=='pressed'}">
+                                <button formaction="admin" formmethod="get" name="item"
+                                        value="order">Unsee
+                                    cupcakes
+                                </button>
+                            </c:if>
 
-
+                            <c:forEach var="Cupcake" items="${order.cupcakeList}">
+                                <c:if test="${pressed=='pressed'}">
+                                    <p>
+                                        Bottom: ${Cupcake.bottom.type} <br>
+                                        Topping: ${Cupcake.topping.type} <br>
+                                        amount: ${Cupcake.amount} <br>
+                                        Price: ${Cupcake.price} <br>
+                                    </p>
+                                </c:if>
+                            </c:forEach>
+                        </form>
                         </td>
+
+
+
                         <td>
                             <form>
                                 <button formaction="deleteOrder" formmethod="post" name="orderID"

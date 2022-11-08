@@ -29,7 +29,7 @@ public class OrderMapper {
                     Timestamp timestamp = rs.getTimestamp("time");
 
                     Order order = new Order(orderID, userID, totalPrice, timestamp);
-                    order.setOrderList(getCupcakeFromOrderID(orderID, connectionPool));
+                    order.setCupcakeList(getCupcakeFromOrderID(orderID, connectionPool));
                     orderList.add(order);
 
                 }
@@ -61,6 +61,7 @@ public class OrderMapper {
                     int price = rs.getInt("price");
                     int amount = rs.getInt("amount");
                     Cupcake cupcake = new Cupcake(topping, bottom, price, orderID, amount);
+                    cupcakeList.add(cupcake);
                 }
             }
         } catch (SQLException ex) {
@@ -157,7 +158,7 @@ public class OrderMapper {
                     int totalPrice = rs.getInt("totalPrice");
                     Timestamp timestamp = rs.getTimestamp("time");
                     Order order = new Order(orderID, userID, totalPrice, timestamp);
-                    order.setOrderList(getCupcakeFromOrderID(orderID, connectionPool));
+                    order.setCupcakeList(getCupcakeFromOrderID(orderID, connectionPool));
                     orderList.add(order);
                 }
             }
@@ -200,5 +201,29 @@ public class OrderMapper {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public static Order getOrdersFromOrderID(int userID, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+        Order order = null;
+
+        String sql = "SELECT * from orders where userid=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1,userID);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    int orderID = rs.getInt("idorders");
+                    int totalPrice = rs.getInt("totalPrice");
+                    Timestamp timestamp = rs.getTimestamp("time");
+                    order = new Order(orderID, userID, totalPrice, timestamp);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "No users were found");
+        }
+        return order;
     }
 }

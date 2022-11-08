@@ -1,7 +1,6 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
-import dat.backend.model.entities.Cupcake;
 import dat.backend.model.entities.Order;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
@@ -27,7 +26,6 @@ public class UserOrders extends HttpServlet {
         String item = "userOrder";
         String email = request.getParameter("email");
         ArrayList<Order> orderList = null;
-        ArrayList<ArrayList<Cupcake>> cupcakeList = new ArrayList<>();
 
 
         try {
@@ -36,16 +34,8 @@ public class UserOrders extends HttpServlet {
             e.printStackTrace();
         }
 
-        for(Order o: orderList){
 
-            try {
-                cupcakeList.add(OrderFacade.getCupcakeFromOrderID(o.getOrderid(),connectionPool));
-            } catch (DatabaseException e) {
-                e.printStackTrace();
-            }
-        }
 
-        request.setAttribute("cupcakeList", cupcakeList);
         request.setAttribute("orderList",orderList);
         request.setAttribute("item",item);
         request.getRequestDispatcher("WEB-INF/admin.jsp").forward(request,response);
