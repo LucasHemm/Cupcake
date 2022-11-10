@@ -22,7 +22,7 @@
 
             <select name="bottom" id="bottoms" value="Bottoms">
                 <c:forEach var="item" items="${sessionScope.bottomList}">
-                    <option value="${item.bottomid}">${item.type}</option>
+                    <option value="${item.bottomid}">${item.type} ${item.price},-</option>
 
                 </c:forEach>
             </select>
@@ -32,7 +32,7 @@
 
             <select name="topping" id="toppings" value="Toppings">
                 <c:forEach var="item" items="${sessionScope.toppingList}">
-                    <option value="${item.toppingid}">${item.type}</option>
+                    <option value="${item.toppingid}">${item.type} ${item.price},-</option>
 
                 </c:forEach>
             </select>
