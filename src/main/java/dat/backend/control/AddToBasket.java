@@ -16,7 +16,15 @@ public class AddToBasket extends HttpServlet {
 
     private static ConnectionPool connectionPool = ApplicationStart.getConnectionPool();
 
+    private static int cupcakeId = 0;
 
+    static public int getCupcakeId() {
+        return cupcakeId;
+    }
+
+    public static void setCupcakeId(int id) {
+        cupcakeId = id;
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,8 +49,11 @@ public class AddToBasket extends HttpServlet {
         Cupcake cupcake = new Cupcake(topping,bottom,(topping.getPrice()+bottom.getPrice())*amount,amount);
         HttpSession session = request.getSession();
 
+        cupcake.setCupcakeId(cupcakeId);
+
         Basket basket = (Basket) session.getAttribute("basket");
         basket.addToBasket(cupcake);
+        cupcakeId++;
         request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
 
 

@@ -44,15 +44,16 @@ public class CreateUser extends HttpServlet {
         session.setAttribute("bottomList", CupcakeFacade.getbottoms(connectionPool));
         session.setAttribute("toppingList", CupcakeFacade.gettoppings(connectionPool));
 
+
         try {
             User user = UserFacade.createUser(name,email, password,balance, connectionPool);
             session = request.getSession();
             session.setAttribute("user", user); // adding user object to session scope
-
             request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
         } catch (DatabaseException e) {
-            request.setAttribute("errormessage", e.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request, response);
+            String msg = "En bruger med den email eksisterer allerede";
+            request.setAttribute("msg",msg);
+            request.getRequestDispatcher("WEB-INF/createUser.jsp").forward(request, response);
         }
 
     }

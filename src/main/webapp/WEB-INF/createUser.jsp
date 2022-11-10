@@ -31,7 +31,7 @@
             <input type="submit"  value="Create"/>
         </form>
 
-
+        <h4>${requestScope.msg}</h4>
 
     </jsp:body>
 

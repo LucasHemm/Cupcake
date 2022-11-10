@@ -7,7 +7,15 @@ public class Cupcake {
     private int price;
     private int orderid;
     private int amount;
+    private int cupcakeId;
 
+    public int getCupcakeId() {
+        return cupcakeId;
+    }
+
+    public void setCupcakeId(int cupcakeId) {
+        this.cupcakeId = cupcakeId;
+    }
 
     public Cupcake(Topping topping, Bottom bottom, int price, int orderid, int amount) {
         this.topping = topping;

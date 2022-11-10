@@ -43,6 +43,7 @@ public class Pay extends HttpServlet {
                 OrderFacade.createOrder(basket, totalPrice, userid, connectionPool);
                 basket.newBasket();
                 session.setAttribute("basket",basket);
+                AddToBasket.setCupcakeId(0);
                 request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
             }
         } catch (DatabaseException e) {

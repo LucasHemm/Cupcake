@@ -6,7 +6,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Din kurv
+         Din kurv <br/>
     </jsp:attribute>
 
     <jsp:body>
@@ -39,14 +39,17 @@
                     </td>
                         <%--                    buttons--%>
                     <td>
-
+                        <form method="post">
+                                <button formaction="deleteFromBasket" type="submit" class="btn btn-danger"
+                                        name="cupcakeId" value="${cupcake.cupcakeId}">Slet</button>
+                        </form>
                     </td>
                 </tr>
 
             </c:forEach>
         </table>
         <c:if test="${sessionScope.basket.cupcakeArrayList.size() != 0}">
-
+           <h5>${requestScope.msg}<br/></h5>
         <form method="post">
             <div class="float-end">
                 <button formaction="pay" type="submit" class="btn btn-success" name="0">Pay now</button>
