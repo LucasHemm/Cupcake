@@ -3,6 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.CheckString;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 
@@ -35,9 +36,14 @@ public class AddToBasket extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        int toppingId = Integer.parseInt(request.getParameter("topping"));
-        int bottomId = Integer.parseInt(request.getParameter("bottom"));
-        int amount = Integer.parseInt(request.getParameter("amount"));
+//        int toppingId = Integer.parseInt(request.getParameter("topping"));
+//        int bottomId = Integer.parseInt(request.getParameter("bottom"));
+//        int amount = Integer.parseInt(request.getParameter("amount"));
+
+        int toppingId = CheckString.stringToInt(request.getParameter("topping"));
+        int bottomId = CheckString.stringToInt(request.getParameter("bottom"));
+        int amount = CheckString.stringToInt(request.getParameter("amount"));
+
         Topping topping = null;
         Bottom bottom = null;
         try {

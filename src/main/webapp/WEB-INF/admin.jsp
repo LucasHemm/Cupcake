@@ -12,15 +12,18 @@
     <jsp:body>
 
 
-
         <form>
             <table>
                 <td>
-                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="order">Ordre</button>
+                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="order">
+                        Ordre
+                    </button>
                 </td>
 
                 <td>
-                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="user">Brugere</button>
+                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="user">
+                        Brugere
+                    </button>
                 </td>
 
             </table>
@@ -36,7 +39,9 @@
                     <tr>
                         <th>E-mail</th>
                         <th>Options</th>
-                        <th>Indsæt penge</th>
+                        <th>Indsæt penge: <br>
+                            <input type="number" id="amount" name="amount" min="1" max="10000"> ,-<br>
+                        </th>
                     </tr>
                     </thead>
                     <c:forEach var="user" items="${requestScope.userList}">
@@ -44,15 +49,16 @@
                             <td>${user.email}</td>
                             <td>
 
-                                <button formaction="userOrders" formmethod="post" name="email" value="${user.email}" class="btn btn-secondary">See
+                                <button formaction="userOrders" formmethod="post" name="email" value="${user.email}"
+                                        class="btn btn-secondary">See
                                     orders
                                 </button>
 
                             </td>
                             <td>
-                                Beløb: <br><input type="number" id="amount" name="amount" min="1" max="10000"> ,-<br>
                                 <br>
-                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}" class="btn btn-success">Add
+                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}"
+                                        class="btn btn-success">Add
                                     money
                                 </button>
                             </td>
@@ -86,9 +92,6 @@
                                     <b>Topping:</b> ${cupcake.topping.type}
                                     <b>Antal:</b> ${cupcake.amount}
                                 </p>
-
-
-
 
 
                             </c:forEach>
@@ -134,9 +137,6 @@
                                 </p>
 
 
-
-
-
                             </c:forEach>
                         </td>
                         <td>${order.calcTotalprice()}</td>
@@ -153,9 +153,6 @@
                 </c:forEach>
             </table>
         </c:if>
-
-
-
 
 
     </jsp:body>
