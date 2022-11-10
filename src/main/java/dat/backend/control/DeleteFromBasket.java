@@ -35,6 +35,9 @@ public class DeleteFromBasket extends HttpServlet {
         String msg = "Cupcake ordre slettet!";
         request.setAttribute("msg",msg);
 
+
+        int totalPrice = basket.calcTotalprice();
+        session.setAttribute("totalPrice",totalPrice);
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
 
 

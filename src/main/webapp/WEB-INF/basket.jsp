@@ -48,6 +48,11 @@
 
             </c:forEach>
         </table>
+        <div class=" d-flex justify-content-end">
+            <p>
+                <b>Samlet pris:</b> ${sessionScope.totalPrice},-
+            </p>
+        </div>
         <c:if test="${sessionScope.basket.cupcakeArrayList.size() != 0}">
            <h5>${requestScope.msg}<br/></h5>
         <form method="post">

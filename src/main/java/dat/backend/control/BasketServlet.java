@@ -1,5 +1,7 @@
 package dat.backend.control;
 
+import dat.backend.model.entities.Basket;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -55,6 +57,10 @@ public class BasketServlet extends HttpServlet {
 //
 //        servletContext.setAttribute("stringSetContext", stringSetContext);
 
+        HttpSession session = request.getSession();
+        Basket basket = (Basket) session.getAttribute("basket");
+        int totalPrice = basket.calcTotalprice();
+        session.setAttribute("totalPrice",totalPrice);
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
 
     }
@@ -63,6 +69,10 @@ public class BasketServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
+        HttpSession session = request.getSession();
+        Basket basket = (Basket) session.getAttribute("basket");
+        int totalPrice = basket.calcTotalprice();
+        session.setAttribute("totalPrice",totalPrice);
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
 
 
