@@ -4,6 +4,7 @@ import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
+import dat.backend.model.persistence.CheckString;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 import dat.backend.model.persistence.UserFacade;
@@ -29,7 +30,7 @@ public class AddMoney extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String item = "user";
-        int amount = Integer.parseInt(request.getParameter("amount"));
+        int amount = CheckString.stringToInt(request.getParameter("amount"));
         ArrayList<User> userList = null;
 
         try {
