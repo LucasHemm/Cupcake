@@ -36,6 +36,7 @@
                     <tr>
                         <th>E-mail</th>
                         <th>Options</th>
+                        <th>Amount for depositing to the user's account:</th>
                     </tr>
                     </thead>
                     <c:forEach var="user" items="${requestScope.userList}">
@@ -43,16 +44,15 @@
                             <td>${user.email}</td>
                             <td>
 
-                                <button formaction="userOrders" formmethod="post" name="email" value="${user.email}">See
+                                <button formaction="userOrders" formmethod="post" name="email" value="${user.email}" class="btn btn-secondary">See
                                     orders
                                 </button>
 
                             </td>
                             <td>
-                                <label for="amount">Amount for depositing to the user's account:</label><br>
-                                <input type="number" id="amount" name="amount" min="1" max="999"><br>
+                                <input type="number" id="amount" name="amount" min="1" max="999"> ,-<br>
                                 <br>
-                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}">Add
+                                <button formaction="addMoney" formmethod="post" name="email" value="${user.email}" class="btn btn-success">Add
                                     money
                                 </button>
                             </td>

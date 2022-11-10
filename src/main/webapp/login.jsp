@@ -19,7 +19,7 @@
             <input type="text" id="email" name="email"/>
             <label for="password">Password: </label>
             <input type="password" id="password" name="password"/>
-            <input type="submit"  value="Log ind"/>
+            <input type="submit" class="btn btn-info" value="Log ind" />
         </form>
 
     </jsp:body>
