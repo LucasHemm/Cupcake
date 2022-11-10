@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Basket;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
 import dat.backend.model.persistence.ConnectionPool;
@@ -43,6 +44,8 @@ public class CreateUser extends HttpServlet {
         String role = request.getParameter("role");
         session.setAttribute("bottomList", CupcakeFacade.getbottoms(connectionPool));
         session.setAttribute("toppingList", CupcakeFacade.gettoppings(connectionPool));
+        Basket basket = new Basket();
+        session.setAttribute("basket",basket);
 
 
         try {

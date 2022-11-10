@@ -49,6 +49,8 @@ public class Pay extends HttpServlet {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+        String msg = "Du har ikke nok penge på kontoen";
+        request.setAttribute("msg",msg);
         request.getRequestDispatcher("WEB-INF/basket.jsp").forward(request, response);
 
     }

@@ -81,7 +81,7 @@
                             <c:forEach var="cupcake" items="${order.cupcakeList}">
 
                                 <p>
-
+                                    <b>BrugerID:</b> ${order.userid}
                                     <b>Bund:</b> ${cupcake.bottom.type}
                                     <b>Topping:</b> ${cupcake.topping.type}
                                     <b>Antal:</b> ${cupcake.amount}

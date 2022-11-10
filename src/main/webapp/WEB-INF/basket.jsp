@@ -48,6 +48,8 @@
 
             </c:forEach>
         </table>
+
+
         <div class=" d-flex justify-content-end">
             <p>
                 <b>Samlet pris:</b> ${sessionScope.totalPrice},-
