@@ -36,4 +36,8 @@ public class OrderFacade {
         return OrderMapper.getOrderID(connectionPool);
     }
 
+    public static void createOrder(Basket basket,int totalPrice, int userid, ConnectionPool connectionPool) {
+
+         OrderMapper.createOrder(basket,totalPrice,userid,connectionPool);
+    }
 }

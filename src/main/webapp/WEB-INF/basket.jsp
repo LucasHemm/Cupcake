@@ -12,31 +12,47 @@
     <jsp:body>
 
 
-<%--        <form action="basketServlet" method="get">--%>
-<%--            <table class="table table-striped">--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>Cupcake</th>--%>
-<%--                    <th>Pris</th>--%>
-<%--                </tr>--%>
-<%--                </thead>--%>
-<%--                <c:forEach var="cupcake" items="${sessionScope.basket.getOrder}">--%>
-<%--                        <tr>--%>
-<%--                            <td>${cupcake.name} (${cupcake.created})</td>--%>
-<%--                            <td>--%>
-<%--                                <button formaction="fjern" name="item_id" value="${cupcake.id}">Fjern</button>--%>
-<%--                            </td>--%>
-<%--                        </tr>--%>
-<%--                </c:forEach>--%>
-<%--            </table>--%>
-<%--        </form>--%>
+        <form method="post">
 
-<%--        Du har nu tilføjet ${sessionScope.amount} cupcakes til din kurv--%>
-<%--        <br><br>--%>
 
-<%--        <h1>Session</h1>--%>
-<%--        (Session : ) De tilføjede cupcakes er følgende ${sessionScope.orderList}--%>
-<%--        <br><br>--%>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Details</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <c:forEach var="cupcake" items="${sessionScope.basket.cupcakeArrayList}">
+
+                <tr>
+                    <td>
+                        <p>
+                            <b>Bottom:</b> ${cupcake.bottom.type}
+                            <b>Topping:</b> ${cupcake.topping.type}
+                            <b>Amount:</b> ${cupcake.amount}
+                        </p>
+                    </td>
+                    <td>
+                        <b>Price:</b> ${cupcake.price},-
+
+                    </td>
+                        <%--                    buttons--%>
+                    <td>
+
+                    </td>
+                </tr>
+
+            </c:forEach>
+        </table>
+        <c:if test="${sessionScope.basket.cupcakeArrayList.size() != 0}">
+
+        <form method="post">
+            <div class="float-end">
+                <button formaction="pay" type="submit" class="btn btn-success" name="0">Pay now</button>
+            </div>
+        </form>
+        </c:if>
 
 
     </jsp:body>

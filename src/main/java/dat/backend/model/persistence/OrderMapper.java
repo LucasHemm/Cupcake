@@ -143,14 +143,14 @@ public class OrderMapper {
     static ArrayList<Order> getOrdersFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
-        int userID = getUserIDFromEmail(email,connectionPool);
+        int userID = getUserIDFromEmail(email, connectionPool);
         ArrayList<Order> orderList = new ArrayList<>();
 
         String sql = "SELECT * from orders where userid=?";
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1,userID);
+                ps.setInt(1, userID);
                 ResultSet rs = ps.executeQuery();
 
                 while (rs.next()) {
@@ -175,7 +175,7 @@ public class OrderMapper {
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setString(1,email);
+                ps.setString(1, email);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
@@ -188,8 +188,7 @@ public class OrderMapper {
         return ID;
     }
 
-    private static void deleteCupcakesFromOrderID(int id, ConnectionPool connectionPool)
-    {
+    private static void deleteCupcakesFromOrderID(int id, ConnectionPool connectionPool) {
         String sql = "delete from cupcake where orderid = ?";
 
         try (Connection connection = connectionPool.getConnection()) {
@@ -211,7 +210,7 @@ public class OrderMapper {
 
         try (Connection connection = connectionPool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1,userID);
+                ps.setInt(1, userID);
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
@@ -247,4 +246,51 @@ public class OrderMapper {
         return orderID;
 
     }
+
+    public static void createOrder(Basket basket, int totalPrice, int userid, ConnectionPool connectionPool) {
+
+        int orderid = 0;
+
+        System.out.println("USER ID IS: " + userid);
+        String sql = "INSERT INTO orders (userid, totalPrice) VALUES (?, ?)";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, userid);
+                ps.setInt(2, totalPrice);
+                ps.executeUpdate();
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                orderid = rs.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        createCupcake(orderid, basket, connectionPool);
+
+    }
+
+    private static void createCupcake(int orderid, Basket basket, ConnectionPool connectionPool) {
+
+        String sql = "INSERT INTO cupcake (toppingid,bottomid,price,orderid,amount) VALUES (?,?,?,?,?)";
+
+        for (Cupcake c : basket.getCupcakeArrayList()) {
+            try (Connection connection = connectionPool.getConnection()) {
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                    ps.setInt(1, c.getTopping().getToppingid());
+                    ps.setInt(2, c.getBottom().getBottomid());
+                    ps.setInt(3, c.calcPrice());
+                    ps.setInt(4, orderid);
+                    ps.setInt(5, c.getAmount());
+                    ps.executeUpdate();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+    }
+
+
 }

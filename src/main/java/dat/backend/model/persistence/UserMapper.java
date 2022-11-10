@@ -143,4 +143,59 @@ class UserMapper {
         }
         return user;
     }
+    static int getUserIdFromEmail(String email, ConnectionPool connectionPool) throws DatabaseException {
+        Logger.getLogger("web").log(Level.INFO, "");
+
+        int userId = 0;
+
+        String sql = "SELECT * FROM user WHERE email=?";
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+
+                    userId = rs.getInt("iduser");
+
+                } else {
+                    throw new DatabaseException("Wrong userid");
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
+        }
+        return userId;
+    }
+
+
+    public static boolean payment(int totalPrice, User user, ConnectionPool connectionPool) throws DatabaseException {
+
+        if(totalPrice <= user.getBalance()){
+            user.setBalance(user.getBalance() - totalPrice);
+            int userid = UserMapper.getUserIdFromEmail(user.getEmail(),connectionPool );
+
+            String sql = "update user set balance = ? where iduser=?;";
+
+            try (Connection connection = connectionPool.getConnection()) {
+                try (PreparedStatement ps = connection.prepareStatement(sql)) {
+
+                    ps.setInt(1, user.getBalance());
+                    ps.setInt(2, userid);
+                    ps.executeUpdate();
+                }
+            } catch (SQLException ex) {
+                throw new DatabaseException(ex, "Could not add money into database");
+            }
+
+
+
+            return true;
+        }
+
+
+        return false;
+
+    }
 }

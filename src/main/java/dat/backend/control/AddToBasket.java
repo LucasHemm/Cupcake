@@ -38,7 +38,7 @@ public class AddToBasket extends HttpServlet {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
-        Cupcake cupcake = new Cupcake(topping,bottom,topping.getPrice()+bottom.getPrice()*amount,amount);
+        Cupcake cupcake = new Cupcake(topping,bottom,(topping.getPrice()+bottom.getPrice())*amount,amount);
         HttpSession session = request.getSession();
 
         Basket basket = (Basket) session.getAttribute("basket");

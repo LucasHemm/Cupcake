@@ -30,7 +30,9 @@ public class Basket {
         return sum;
     }
 
-
+    public void newBasket(){
+       cupcakeArrayList = new  ArrayList<Cupcake>();
+    }
 
 
 
