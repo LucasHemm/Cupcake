@@ -36,7 +36,7 @@
                     <tr>
                         <th>E-mail</th>
                         <th>Options</th>
-                        <th>Amount for depositing to the user's account:</th>
+                        <th>Indsæt penge</th>
                     </tr>
                     </thead>
                     <c:forEach var="user" items="${requestScope.userList}">
@@ -50,7 +50,7 @@
 
                             </td>
                             <td>
-                                <input type="number" id="amount" name="amount" min="1" max="10000"> <br>
+                                Beløb: <br><input type="number" id="amount" name="amount" min="1" max="10000"> ,-<br>
                                 <br>
                                 <button formaction="addMoney" formmethod="post" name="email" value="${user.email}" class="btn btn-success">Add
                                     money
