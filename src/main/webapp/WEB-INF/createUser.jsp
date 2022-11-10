@@ -5,30 +5,28 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the sign up page
-    </jsp:attribute>
-
-    <jsp:attribute name="footer">
+         Her kan du oprette dig.
 
     </jsp:attribute>
+
 
     <jsp:body>
 
-        <p>create user page. </p>
 
-        <h3>You can create a user here</h3>
+
 
         <form action="createUser" method="post">
-            <label for="name">Name: </label>
-            <input type="text" id="name" name="name"/>
-            <label for="email">email: </label>
-            <input type="text" id="email" name="email"/>
-            <label for="password">Password: </label>
-            <input type="text" id="password" name="password"/>
-            <label for="balance">balance: </label>
-            <input type="text" id="balance" name="balance"/>
+            <label for="name">Navn: </label><br>
+            <input type="text" id="name" name="name"/><br><br>
+            <label for="email">Email: </label><br>
+            <input type="text" id="email" name="email"/><br><br>
+            <label for="password">Password: </label><br>
+            <input type="text" id="password" name="password"/><br><br>
 
-            <input type="submit"  value="Create"/>
+            <label for="balance">Saldo: </label><br>
+            <input type="text" id="balance" name="balance"/><br><br>
+
+            <input type="submit" class="btn btn-info" value="Opret"/>
         </form>
 
         <h4>${requestScope.msg}</h4>

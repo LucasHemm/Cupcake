@@ -18,9 +18,9 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Details</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>Detaljer</th>
+                <th>Pris</th>
+                <th></th>
             </tr>
             </thead>
             <c:forEach var="cupcake" items="${sessionScope.basket.cupcakeArrayList}">
@@ -28,9 +28,9 @@
                 <tr>
                     <td>
                         <p>
-                            <b>Bottom:</b> ${cupcake.bottom.type}
+                            <b>Bund:</b> ${cupcake.bottom.type}
                             <b>Topping:</b> ${cupcake.topping.type}
-                            <b>Amount:</b> ${cupcake.amount}
+                            <b>Antal:</b> ${cupcake.amount}
                         </p>
                     </td>
                     <td>
@@ -57,7 +57,7 @@
            <h5>${requestScope.msg}<br/></h5>
         <form method="post">
             <div class="float-end">
-                <button formaction="pay" type="submit" class="btn btn-success" name="0">Pay now</button>
+                <button formaction="pay" type="submit" class="btn btn-success" name="0">Betal</button>
             </div>
         </form>
         </c:if>

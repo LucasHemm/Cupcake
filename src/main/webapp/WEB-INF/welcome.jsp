@@ -8,23 +8,16 @@
          Velkommen ombord
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
-        Logged in area
-    </jsp:attribute>
 
     <jsp:body>
 
         <br>
         <h3>Øens bedste cupcakes. Vælg og bestil her:</h3>
 
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of admin is ="${sessionScope.user.admin}".</p>
-        </c:if>
-
         <form action="addToBasket" method="post">
 
 
-            <label for="bottoms">Choose a bottom:</label>
+            <label for="bottoms"><b>Vælg en bund:</b></label>
 
 
             <select name="bottom" id="bottoms" value="Bottoms">
@@ -35,7 +28,7 @@
             </select>
 
 
-            <label for="toppings">Choose a topping:</label>
+            <label for="toppings"><b>Vælg topping:</b></label>
 
             <select name="topping" id="toppings" value="Toppings">
                 <c:forEach var="item" items="${sessionScope.toppingList}">
@@ -44,7 +37,7 @@
                 </c:forEach>
             </select>
 
-            <label for="amount">Amount:</label>
+            <label for="amount"><b>Antal:</b></label>
 
             <input type="number" id="amount" name="amount" min="1" max="100" value="1"/>
 

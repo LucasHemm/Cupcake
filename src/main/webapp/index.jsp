@@ -5,33 +5,20 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the frontpage YOU DID it you bastard it finally worked
+         <h2>Velkommen til Olsker cupcakes.</h2>
+         <h5>Venligst log ind, eller opret dig som kunde.</h5> <br>
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
-        Welcome to the frontpage
-    </jsp:attribute>
 
     <jsp:body>
 
-        <p>Startcode for 2nd semester </p>
-
-        <c:if test="${sessionScope.user != null}">
-            <p>You are logged in with the role of "${sessionScope.user}".</p>
-        </c:if>
-
         <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
+            <p>Log ind her: <a href="login.jsp">Log ind</a></p>
         </c:if>
-        <br/>
         <c:if test="${sessionScope.user == null}">
-            <p>If you are not already a customer, sign up here: <a
-                    href="createUser">Sign up</a></p>
+            <p>Du kan oprette dig som kunde her: <a href="createUser">Opret</a></p>
         </c:if>
 
     </jsp:body>
 
 </t:pagetemplate>
-
-a${x.bottom} bottom with ${x.topping}topping

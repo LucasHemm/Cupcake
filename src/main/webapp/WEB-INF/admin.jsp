@@ -5,30 +5,24 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         <p>You are logged in as "${sessionScope.user.email}".</p>
+         <p>Velkommen admin fra Olsker.</p>
     </jsp:attribute>
 
 
     <jsp:body>
 
-        <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="login.jsp">Login</a></p>
-        </c:if>
+
 
         <form>
             <table>
                 <td>
-                    <button formaction="admin" formmethod="get" name="item" value="order">Orders</button>
+                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="order">Ordre</button>
                 </td>
 
                 <td>
-                    <button formaction="admin" formmethod="get" name="item" value="user">Users</button>
+                    <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="user">Brugere</button>
                 </td>
 
-                <td>
-                    <button formaction="admin" formmethod="get" name="item" value="graphs">Statistics</button>
-                </td>
             </table>
         </form>
 
@@ -73,123 +67,95 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Order ID</th>
                     <th>Cupcakes</th>
-                    <th>Options</th>
+                    <th>Samlet pris</th>
+                    <th>Slet</th>
                 </tr>
                 </thead>
                 <c:forEach var="order" items="${requestScope.orderList}">
                     <tr>
-                        <td>${order.orderid}</td>
-                        <td><form>
-                            <c:if test="${pressed!='pressed'}">
-                                <button formaction="seeCupcakes" formmethod="post" name="orderID"
-                                        value="${order.orderid}">See
-                                    cupcakes
-                                </button>
-                            </c:if>
-                            <c:if test="${pressed=='pressed'}">
-                                <button formaction="admin" formmethod="get" name="item"
-                                        value="order">Unsee
-                                    cupcakes
-                                </button>
-                            </c:if>
+                        <td>
+                            <b>Ordre id:</b> ${order.orderid}
+                            <b>Dato:</b> ${order.time}
+                            <br>
+                            <c:forEach var="cupcake" items="${order.cupcakeList}">
 
-                            <c:forEach var="Cupcake" items="${order.cupcakeList}">
-                                <c:if test="${pressed=='pressed'}">
-                                    <p>
-                                        Bottom: ${Cupcake.bottom.type} <br>
-                                        Topping: ${Cupcake.topping.type} <br>
-                                        amount: ${Cupcake.amount} <br>
-                                        Price: ${Cupcake.price} <br>
-                                    </p>
-                                </c:if>
+                                <p>
+
+                                    <b>Bund:</b> ${cupcake.bottom.type}
+                                    <b>Topping:</b> ${cupcake.topping.type}
+                                    <b>Antal:</b> ${cupcake.amount}
+                                </p>
+
+
+
+
+
                             </c:forEach>
-                        </form>
                         </td>
-
-
+                        <td>${order.calcTotalprice()}</td>
 
                         <td>
                             <form>
-                                <button formaction="deleteOrder" formmethod="post" name="orderID"
-                                        value="${order.orderid}">Delete
+                                <button formaction="deleteOrder" class="btn btn-danger" formmethod="post" name="orderID"
+                                        value="${order.orderid}">Slet
                                 </button>
                             </form>
                         </td>
                     </tr>
+
                 </c:forEach>
             </table>
+
         </c:if>
 
         <c:if test="${item=='userOrder'}">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Order ID</th>
-                    <th>Options</th>
+                    <th>Cupcakes</th>
+                    <th>Samlet pris</th>
+                    <th>Slet</th>
                 </tr>
                 </thead>
                 <c:forEach var="order" items="${requestScope.orderList}">
                     <tr>
-                        <td>${order.orderid}</td>
+                        <td>
+                            <b>Ordre id:</b> ${order.orderid}
+                            <b>Dato:</b> ${order.time}
+                            <br>
+                            <c:forEach var="cupcake" items="${order.cupcakeList}">
+
+                                <p>
+
+                                    <b>Bund:</b> ${cupcake.bottom.type}
+                                    <b>Topping:</b> ${cupcake.topping.type}
+                                    <b>Antal:</b> ${cupcake.amount}
+                                </p>
+
+
+
+
+
+                            </c:forEach>
+                        </td>
+                        <td>${order.calcTotalprice()}</td>
+
                         <td>
                             <form>
-                                <button formaction="deleteOrder" formmethod="post" name="orderID"
-                                        value="${order.orderid}">Delete
+                                <button formaction="deleteOrder" class="btn btn-danger" formmethod="post" name="orderID"
+                                        value="${order.orderid}">Slet
                                 </button>
                             </form>
                         </td>
                     </tr>
+
                 </c:forEach>
             </table>
         </c:if>
 
-        <c:if test="${item=='graphs'}">
-            <table class="graph">
-                <caption>Describe this Data</caption>
-                <thead>
-                <tr>
-                    <th scope="col">Item</th>
-                    <th scope="col">Percent</th>
-                </tr>
-                </thead>
-                <tbody class="horizontal">
-                <tr style="height:85%">
-                    <th scope="row">Your Blog</th>
-                    <td><span>85%</span></td>
-                </tr>
-                <tr style="height:23%">
-                    <th scope="row">Medium</th>
-                    <td><span>23%</span></td>
-                </tr>
-                <tr style="height:7%">
-                    <th scope="row">Tumblr</th>
-                    <td><span>7%</span></td>
-                </tr>
-                <tr style="height:38%">
-                    <th scope="row">Facebook</th>
-                    <td><span>38%</span></td>
-                </tr>
-                <tr style="height:35%">
-                    <th scope="row">Youtube</th>
-                    <td><span>35%</span></td>
-                </tr>
-                <tr style="height:30%">
-                    <th scope="row">LinkedIn</th>
-                    <td><span>30%</span></td>
-                </tr>
-                <tr style="height:5%">
-                    <th scope="row">Twitter</th>
-                    <td><span>5%</span></td>
-                </tr>
-                <tr style="height:20%">
-                    <th scope="row">Other</th>
-                    <td><span>20%</span></td>
-                </tr>
-                </tbody>
-            </table>
-        </c:if>
+
+
 
 
     </jsp:body>

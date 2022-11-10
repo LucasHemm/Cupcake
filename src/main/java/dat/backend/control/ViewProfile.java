@@ -1,6 +1,7 @@
 package dat.backend.control;
 
 import dat.backend.model.config.ApplicationStart;
+import dat.backend.model.entities.Cupcake;
 import dat.backend.model.entities.Order;
 import dat.backend.model.entities.User;
 import dat.backend.model.exceptions.DatabaseException;
@@ -11,6 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @WebServlet(name = "viewProfile", value = "/viewProfile")
@@ -31,7 +33,11 @@ public class ViewProfile extends HttpServlet {
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+
+
         request.setAttribute("orderList",orderList);
+
+
 
 
         request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);

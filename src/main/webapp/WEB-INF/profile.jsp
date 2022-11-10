@@ -5,42 +5,51 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Welcome to the sign up page
+         Profil oversigt.
     </jsp:attribute>
 
-    <jsp:attribute name="footer">
-
-    </jsp:attribute>
 
     <jsp:body>
 
-        <p>This is your customer page</p>
 
 
-        <p>Name: ${sessionScope.user.name} <br/>
-        Email: ${sessionScope.user.email}<br/>
-        Password: ${sessionScope.user.password} <br/>
-        Balance: ${sessionScope.user.balance}</p>
+
+        <p> <b>Name:</b> ${sessionScope.user.name} <br/>
+            <b>Email:</b> ${sessionScope.user.email}<br/>
+            <b>Saldo:</b> ${sessionScope.user.balance},-</p>
 
 
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Order ID</th>
-                <th>Options</th>
+                <th>Cupcakes</th>
+                <th>Samlet pris pr ordre.</th>
             </tr>
             </thead>
             <c:forEach var="order" items="${requestScope.orderList}">
                 <tr>
-                    <td>${order.orderid}</td>
                     <td>
-                        <form>
-                            <button formaction="deleteOrder" formmethod="post" name="orderID"
-                                    value="${order.orderid}">Delete
-                            </button>
-                        </form>
-                    </td>
+                        <b>Ordre id:</b> ${order.orderid}
+                        <b>Dato:</b> ${order.time}
+                        <br>
+                    <c:forEach var="cupcake" items="${order.cupcakeList}">
+
+                            <p>
+
+                                <b>Bund:</b> ${cupcake.bottom.type}
+                                <b>Topping:</b> ${cupcake.topping.type}
+                                <b>Antal:</b> ${cupcake.amount}
+                            </p>
+
+
+
+
+
+                    </c:forEach>
+                        </td>
+                    <td>${order.calcTotalprice()},-</td>
                 </tr>
+
             </c:forEach>
         </table>
 
