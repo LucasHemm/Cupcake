@@ -42,8 +42,9 @@
             <input type="number" id="amount" name="amount" min="1" max="100" value="1"/>
 
             <button type="submit" class="btn btn-primary">Læg i kurv</button>
-
         </form>
+        <br>
+        <h4>${requestScope.msg}</h4>
         <%--        <c:forEach var="item" items="${requestScope.itemList}">--%>
         <%--            <c:if test="${item.done == true}">--%>
         <%--               --%>
@@ -51,10 +52,6 @@
         <%--        </c:forEach>--%>
 
 
-        <c:if test="${sessionScope.user == null}">
-            <p>You are not logged in yet. You can do it here: <a
-                    href="../login.jsp">Login</a></p>
-        </c:if>
 
     </jsp:body>
 

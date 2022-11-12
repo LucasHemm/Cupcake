@@ -60,6 +60,8 @@ public class AddToBasket extends HttpServlet {
         Basket basket = (Basket) session.getAttribute("basket");
         basket.addToBasket(cupcake);
         cupcakeId++;
+        String msg = "Bestillingen er blevet tilføjet til indkøbskurven";
+        request.setAttribute("msg",msg);
         request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
 
 
