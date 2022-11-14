@@ -24,7 +24,7 @@
             <input type="text" id="password" name="password"/><br><br>
 
             <label for="balance">Saldo: </label><br>
-            <input type="number" id="balance" name="balance" min="0" /><br><br>
+            <input type="number" id="balance" name="balance" max="1000" min="0"/><br><br>
 
             <input type="submit" class="btn btn-info" value="Opret"/>
         </form>

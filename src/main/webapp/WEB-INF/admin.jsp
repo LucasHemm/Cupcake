@@ -56,7 +56,7 @@
                             </td>
                             <td>
                                 <button formaction="addMoney" formmethod="post" name="email" value="${user.email}"
-                                        class="btn btn-success">Tilføj
+                                        class="btn btn-success" max="1000" min="1">Tilføj
                                 </button>
                             </td>
                         </tr>
