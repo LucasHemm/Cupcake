@@ -44,6 +44,8 @@ public class Pay extends HttpServlet {
                 basket.newBasket();
                 session.setAttribute("basket",basket);
                 AddToBasket.setCupcakeId(0);
+                String msg = "Order bestilt og betalt";
+                request.setAttribute("msg",msg);
                 request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
             }
         } catch (DatabaseException e) {
