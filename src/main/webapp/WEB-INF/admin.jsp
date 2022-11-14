@@ -50,16 +50,13 @@
                             <td>
 
                                 <button formaction="userOrders" formmethod="post" name="email" value="${user.email}"
-                                        class="btn btn-secondary">See
-                                    orders
+                                        class="btn btn-secondary">Se ordre
                                 </button>
 
                             </td>
                             <td>
-                                <br>
                                 <button formaction="addMoney" formmethod="post" name="email" value="${user.email}"
-                                        class="btn btn-success">Add
-                                    money
+                                        class="btn btn-success">Tilføj
                                 </button>
                             </td>
                         </tr>
@@ -96,7 +93,7 @@
 
                             </c:forEach>
                         </td>
-                        <td>${order.calcTotalprice()}</td>
+                        <td>${order.calcTotalprice()},-</td>
 
                         <td>
                             <form>
@@ -139,7 +136,7 @@
 
                             </c:forEach>
                         </td>
-                        <td>${order.calcTotalprice()}</td>
+                        <td>${order.calcTotalprice()},-</td>
 
                         <td>
                             <form>
