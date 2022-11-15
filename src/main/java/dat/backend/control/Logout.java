@@ -2,6 +2,7 @@ package dat.backend.control;
 
 import dat.backend.model.persistence.ConnectionPool;
 
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public class Logout extends HttpServlet
         response.setContentType("text/html");
         HttpSession session = request.getSession();
         session.invalidate();
+        AddToBasket.setCupcakeId(0);
         response.sendRedirect("index.jsp");
     }
 }
