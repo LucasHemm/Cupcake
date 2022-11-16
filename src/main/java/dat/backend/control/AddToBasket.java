@@ -3,7 +3,7 @@ package dat.backend.control;
 import dat.backend.model.config.ApplicationStart;
 import dat.backend.model.entities.*;
 import dat.backend.model.exceptions.DatabaseException;
-import dat.backend.model.persistence.CheckString;
+import dat.backend.model.services.CheckString;
 import dat.backend.model.persistence.ConnectionPool;
 import dat.backend.model.persistence.OrderFacade;
 

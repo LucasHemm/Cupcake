@@ -6,12 +6,12 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         Din kurv <br/>
+         Din kurv
     </jsp:attribute>
 
     <jsp:body>
 
-
+        <br/>
         <form method="post">
 
 

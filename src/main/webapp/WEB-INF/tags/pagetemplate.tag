@@ -20,7 +20,7 @@
 </head>
 <body>
 <header>
-    <c:if test="${sessionScope.user != null }">
+    <c:if test="${sessionScope.user != null}">
     <a href="${pageContext.request.contextPath}/redirect"><img src="${pageContext.request.contextPath}/images/olskercupcakes.png" width="900px;"
          class="img-fluid rounded mx-auto d-block"/></a>
     </c:if>

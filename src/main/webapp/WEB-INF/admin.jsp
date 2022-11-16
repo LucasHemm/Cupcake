@@ -5,7 +5,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         <p>Velkommen admin fra Olsker.</p>
+         Velkommen admin fra Olsker.
     </jsp:attribute>
 
 
