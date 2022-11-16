@@ -5,7 +5,7 @@
 
 <t:pagetemplate>
     <jsp:attribute name="header">
-         <h2>Velkommen til Olsker cupcakes.</h2>
+         Velkommen til Olsker cupcakes.
          <h5>Venligst log ind, eller opret dig som ny kunde.</h5> <br>
     </jsp:attribute>
 
