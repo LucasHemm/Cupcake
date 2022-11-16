@@ -22,7 +22,7 @@
 
                 <td>
                     <button formaction="admin" class="btn btn-secondary" formmethod="get" name="item" value="user">
-                        Brugere
+                        Kunder
                     </button>
                 </td>
 
